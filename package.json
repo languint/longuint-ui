@@ -20,7 +20,6 @@
 	"files": [
 		"out",
 		"!**/*.tsbuildinfo",
-		"!**/__tests__",
 		"!**/app/config*"
 	],
 	"publishConfig": {
