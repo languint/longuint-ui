@@ -1,9 +1,6 @@
 <div align="center">
   <h1>longuint-ui 🧩</h1>
 
-    [ci-badge]: https://github.com/languint/longuint-ui/actions/workflows/ci.yml/badge.svg?branch=main
-    [ci-url]: https://github.com/paradoxuum/commander/actions/workflows/ci.yml
-
   <p>
     A lightweight ui component library
   </p>
