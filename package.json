@@ -1,5 +1,5 @@
 {
-	"name": "@rbxts/longuint-ui",
+	"name": "longuint-ui",
 	"version": "0.4.0",
 	"description": "A lightweight ui component library.",
 	"main": "out/init.lua",

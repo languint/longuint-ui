@@ -7,7 +7,7 @@ import { TextService } from "@rbxts/services";
 import { OptionsContext } from "../interface/options-provider";
 import { Icon } from "./icon";
 
-export enum ButtonStyles {
+enum ButtonStyles {
 	Default,
 	Secondary,
 	Surface,
@@ -28,13 +28,13 @@ interface ImageButtonComponentProps {
 	image?: string;
 }
 
-interface ButtonStyle {
+interface ImageButtonStyle {
 	background: Color3;
 	hover: Color3;
 	textColor: Color3;
 }
 
-function getStyle(style: ButtonStyles, pallete: Pallete): ButtonStyle {
+function getStyle(style: ButtonStyles, pallete: Pallete): ImageButtonStyle {
 	switch (style) {
 		case ButtonStyles.Default:
 			return {
