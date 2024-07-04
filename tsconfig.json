@@ -26,5 +26,5 @@
 		"tsBuildInfoFile": "out/tsconfig.tsbuildinfo",
 		"declaration": true
 	},
-	"include": ["./src/**/*", "test/src/client/app.tsx"]
+	"include": ["./src/**/*"]
 }
