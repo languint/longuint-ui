@@ -153,6 +153,7 @@ export function Button(props: ButtonComponentProps) {
 			) : (
 				<></>
 			)}
+			{props.children}
 		</textbutton>
 	);
 }

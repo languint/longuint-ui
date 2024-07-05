@@ -1,6 +1,6 @@
 import { Pallete } from "../shared/types/pallete";
 
-export const Palletes: { [k: string]: Pallete } = {
+export const Palletes = {
 	Default: {
 		background: Color3.fromHex("#000000"),
 		surface: Color3.fromHex("#272727"),
@@ -20,4 +20,4 @@ export const Palletes: { [k: string]: Pallete } = {
 			primary: Color3.fromHex("#EF7A36")
 		},
 	},
-};
+} as const satisfies { [K: string]: Pallete };

@@ -165,7 +165,7 @@ local function Button(props)
 		Color = if props.outlineColor ~= nil then props.outlineColor else Palletes.Default.subtext,
 		Thickness = 1,
 		ApplyStrokeMode = "Border",
-	})) else (React.createElement(React.Fragment)))
+	})) else (React.createElement(React.Fragment)), props.children)
 end
 return {
 	Button = Button,

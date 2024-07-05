@@ -1,4 +1,3 @@
-
 import React from "@rbxts/react";
 import { InterfaceOptions } from "../../shared/types/interface-options";
 import { OptionsProvider } from "./options-provider";

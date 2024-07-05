@@ -1,12 +1,13 @@
 {
-	"name": "longuint-ui",
-	"version": "0.0.3",
+	"name": "@rbxts/longuint-ui",
+	"version": "0.0.5",
 	"description": "A lightweight ui component library.",
 	"main": "out/init.lua",
 	"scripts": {
 		"build": "rbxtsc --verbose --type=package",
 		"dev": "rbxtsc -w --type=game -p test -i test/include",
-		"serve": "rojo serve test"
+		"serve": "rojo serve test",
+		"prepack": "npm run build"
 	},
 	"keywords": [
 		"roblox-ts",
@@ -14,7 +15,7 @@
 		"components",
 		"interface"
 	],
-	"author": "longuint",
+	"author": "longuint-dev",
 	"license": "MIT",
 	"types": "out/index.d.ts",
 	"files": [
