@@ -1,6 +1,6 @@
 /node_modules
 /include
-/out
+out
 /test/out
 /test/include
 *.tsbuildinfo
