@@ -105,6 +105,7 @@ local function ImageButton(props)
 			setTextWidth(textSize.X)
 		end
 	end, { props.text })
+	print("0.0.9")
 	local _attributes = {
 		Event = events,
 		Size = UDim2.new(size.X.Scale, textWidth + size.X.Offset, size.Y.Scale, size.Y.Offset),
