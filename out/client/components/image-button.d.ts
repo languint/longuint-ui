@@ -3,13 +3,7 @@
 /// <reference types="react" />
 /// <reference types="@rbxts/types" />
 import React, { ReactNode } from "@rbxts/react";
-declare enum ButtonStyles {
-    Default = 0,
-    Secondary = 1,
-    Surface = 2,
-    Outline = 3,
-    Destructive = 4
-}
+import { ButtonStyles } from "./button";
 interface ImageButtonComponentProps {
     style?: ButtonStyles;
     size?: UDim2;

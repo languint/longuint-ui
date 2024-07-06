@@ -9,6 +9,9 @@ local function RootProvider(_param)
 	if options.pallete == nil then
 		options.pallete = Palletes.Default
 	end
+	if options.dockingTolerance == nil then
+		options.dockingTolerance = 20
+	end
 	return React.createElement(OptionsProvider, {
 		options = options,
 	}, children)

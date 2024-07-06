@@ -82,8 +82,8 @@ local function DockableFrameComponent(props)
 				_callback(_v, _k - 1, regionFrames)
 			end
 			-- ▲ ReadonlyArray.forEach ▲
-			if #findCollidingRegions(buttonAsDockableRegion, props.dockableRegions or {}, parentSize) > 0 then
-				local regions = findCollidingRegions(buttonAsDockableRegion, props.dockableRegions or {}, parentSize)
+			if #findCollidingRegions(buttonAsDockableRegion, props.dockableRegions or {}, parentSize, options.dockingTolerance) > 0 then
+				local regions = findCollidingRegions(buttonAsDockableRegion, props.dockableRegions or {}, parentSize, options.dockingTolerance)
 				local dockableRegion = regions[1]
 				framePositionMotion:set(button.Position)
 				framePositionMotion:spring(dockableRegion.position, springs.responsive)

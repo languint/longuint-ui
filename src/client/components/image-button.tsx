@@ -6,14 +6,7 @@ import { springs } from "../springs";
 import { TextService } from "@rbxts/services";
 import { OptionsContext } from "../interface/options-provider";
 import { Icon } from "./icon";
-
-enum ButtonStyles {
-	Default,
-	Secondary,
-	Surface,
-	Outline,
-	Destructive,
-}
+import { ButtonStyles } from "./button";
 
 interface ImageButtonComponentProps {
 	style?: ButtonStyles;
@@ -38,7 +31,7 @@ function getStyle(style: ButtonStyles, pallete: Pallete): ImageButtonStyle {
 	switch (style) {
 		case ButtonStyles.Default:
 			return {
-				background: pallete.context,
+				background: pallete.custom?.primary!,
 				hover: pallete.context.Lerp(new Color3(0, 0, 0), 0.2),
 				textColor: pallete.background,
 			};
@@ -118,6 +111,8 @@ export function ImageButton(props: ImageButtonComponentProps) {
 		}
 	}, [props.text]);
 
+	print("0.0.9")
+
 	return (
 		<textbutton
 			Event={events}
@@ -129,12 +124,12 @@ export function ImageButton(props: ImageButtonComponentProps) {
 			Text={""}
 			AutoButtonColor={false}
 			ClipsDescendants
-			{...props.Native}
 			key={`button`}
+			{...props.Native}
 		>
 			<uicorner CornerRadius={options.pallete?.custom?.borderRadius ?? Palletes.Default.custom?.borderRadius} />
 			<Icon
-				image={props.image}
+				image={props.image ?? ""}
 				color={style.textColor}
 				size={new UDim2(0, 16, 0, 16)}
 				position={new UDim2(0, 16, 0.5, 0)}

@@ -11,31 +11,20 @@ local springs = TS.import(script, script.Parent.Parent, "springs").springs
 local TextService = TS.import(script, TS.getModule(script, "@rbxts", "services")).TextService
 local OptionsContext = TS.import(script, script.Parent.Parent, "interface", "options-provider").OptionsContext
 local Icon = TS.import(script, script.Parent, "icon").Icon
-local ButtonStyles
-do
-	local _inverse = {}
-	ButtonStyles = setmetatable({}, {
-		__index = _inverse,
-	})
-	ButtonStyles.Default = 0
-	_inverse[0] = "Default"
-	ButtonStyles.Secondary = 1
-	_inverse[1] = "Secondary"
-	ButtonStyles.Surface = 2
-	_inverse[2] = "Surface"
-	ButtonStyles.Outline = 3
-	_inverse[3] = "Outline"
-	ButtonStyles.Destructive = 4
-	_inverse[4] = "Destructive"
-end
+local ButtonStyles = TS.import(script, script.Parent, "button").ButtonStyles
 local function getStyle(style, pallete)
 	repeat
 		if style == (ButtonStyles.Default) then
-			return {
-				background = pallete.context,
-				hover = pallete.context:Lerp(Color3.new(0, 0, 0), 0.2),
-				textColor = pallete.background,
-			}
+			local _object = {}
+			local _left = "background"
+			local _result = pallete.custom
+			if _result ~= nil then
+				_result = _result.primary
+			end
+			_object[_left] = _result
+			_object.hover = pallete.context:Lerp(Color3.new(0, 0, 0), 0.2)
+			_object.textColor = pallete.background
+			return _object
 		end
 		if style == (ButtonStyles.Secondary) then
 			return {
@@ -126,6 +115,7 @@ local function ImageButton(props)
 		Text = "",
 		AutoButtonColor = false,
 		ClipsDescendants = true,
+		key = `button`,
 	}
 	local _attribute = props.Native
 	if _attribute then
@@ -133,7 +123,6 @@ local function ImageButton(props)
 			_attributes[_k] = _v
 		end
 	end
-	_attributes.key = `button`
 	local _attributes_1 = {}
 	local _result_1 = options.pallete
 	if _result_1 ~= nil then
@@ -151,17 +140,22 @@ local function ImageButton(props)
 		_condition_1 = _result_2
 	end
 	_attributes_1.CornerRadius = _condition_1
-	return React.createElement("textbutton", _attributes, React.createElement("uicorner", _attributes_1), React.createElement(Icon, {
-		image = "rbxassetid://18324277149",
-		color = style.textColor,
-		size = UDim2.new(0, 16, 0, 16),
-		position = UDim2.new(0, 16, 0.5, 0),
-		imageSize = UDim2.new(0, 16, 0, 16),
-		Native = {
-			AnchorPoint = Vector2.new(0, 0.5),
-		},
-		useAspect = true,
-	}), React.createElement("textlabel", {
+	local _exp = React.createElement("uicorner", _attributes_1)
+	local _attributes_2 = {}
+	local _condition_2 = props.image
+	if _condition_2 == nil then
+		_condition_2 = ""
+	end
+	_attributes_2.image = _condition_2
+	_attributes_2.color = style.textColor
+	_attributes_2.size = UDim2.new(0, 16, 0, 16)
+	_attributes_2.position = UDim2.new(0, 16, 0.5, 0)
+	_attributes_2.imageSize = UDim2.new(0, 16, 0, 16)
+	_attributes_2.Native = {
+		AnchorPoint = Vector2.new(0, 0.5),
+	}
+	_attributes_2.useAspect = true
+	return React.createElement("textbutton", _attributes, _exp, React.createElement(Icon, _attributes_2), React.createElement("textlabel", {
 		Text = props.text,
 		Font = Enum.Font.BuilderSansMedium,
 		TextColor3 = style.textColor,
