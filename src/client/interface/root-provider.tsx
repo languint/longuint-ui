@@ -9,6 +9,7 @@ interface RootProviderProps extends React.PropsWithChildren {
 
 export function RootProvider({ options, children }: RootProviderProps) {
 	if (options.pallete === undefined) options.pallete = Palletes.Default;
+	if (options.dockingTolerance === undefined) options.dockingTolerance = 20;
 
 	return <OptionsProvider options={options}>{children}</OptionsProvider>;
 }

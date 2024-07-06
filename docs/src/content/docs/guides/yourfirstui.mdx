@@ -1,0 +1,35 @@
+---
+title: Your First UI
+description: How to get started using longuint-ui.
+sidebar: 
+    order: 1
+next:
+  link: /guides/dockableframes
+  label: Using Dockable Frames
+---
+
+import { Card, Tabs, TabItem, Code } from '@astrojs/starlight/components'
+
+If you have been following the [Getting Started](/gettingstarted) guide you should have the code:
+<Code lang="tsx" code={`
+import React, { StrictMode } from "@rbxts/react";
+import { App } from "./app";
+import { createRoot } from "@rbxts/react-roblox";
+import { Players } from "@rbxts/services";
+
+const rootInstance = new Instance('ScreenGui')
+rootInstance.IgnoreGuiInset = true
+rootInstance.Name = "root"
+rootInstance.Parent = Players.LocalPlayer.WaitForChild("PlayerGui")
+
+const root = createRoot(rootInstance)
+
+root.render(
+    <StrictMode>
+        <RootProvider options={{pallete: Palletes.Default}}>
+            <App />
+        </RootProvider>
+    </StrictMode>
+)
+`}>
+</Code>

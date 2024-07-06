@@ -14,8 +14,8 @@ export function udimToAbsoluteSize(size: UDim2, parentSize: Vector2): Vector2 {
     );
 }
 
-export function doRegionsCollide(framePosition: Vector2, frameSize: Vector2, regionPosition: Vector2, regionSize: Vector2): boolean {
-    const tolerance = 20;
+export function doRegionsCollide(framePosition: Vector2, frameSize: Vector2, regionPosition: Vector2, regionSize: Vector2, offset: number): boolean {
+    const tolerance = offset;
 
     // Calculate boundaries with tolerance
     const frameLeft = framePosition.X - tolerance;
@@ -38,7 +38,7 @@ export function doRegionsCollide(framePosition: Vector2, frameSize: Vector2, reg
 }
 
 
-export function findCollidingRegions(frame: DockableRegion, regions: DockableRegion[], parentSize: Vector2): DockableRegion[] {
+export function findCollidingRegions(frame: DockableRegion, regions: DockableRegion[], parentSize: Vector2, tolerance: number): DockableRegion[] {
     const framePosition = udimToAbsolute(frame.position, parentSize);
     const frameSize = udimToAbsoluteSize(frame.size, parentSize);
 
@@ -48,7 +48,7 @@ export function findCollidingRegions(frame: DockableRegion, regions: DockableReg
         const regionPosition = udimToAbsolute(region.position, parentSize);
         const regionSize = udimToAbsoluteSize(region.size, parentSize);
 
-        if (doRegionsCollide(framePosition, frameSize, regionPosition, regionSize)) {
+        if (doRegionsCollide(framePosition, frameSize, regionPosition, regionSize, tolerance)) {
             collidingRegions.push(region);
         }
     }

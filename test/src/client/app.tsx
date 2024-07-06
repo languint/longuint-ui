@@ -14,7 +14,7 @@ export function App() {
 	const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
 
 	return (
-		<RootProvider options={{ pallete: Palletes.Default }}>
+		<RootProvider options={{ pallete: Palletes.Default, dockingTolerance: 20 }}>
 			<Frame size={new UDim2(0.25, 0, 1, 0)} position={new UDim2(0.75, 0, 0, 0)} cornerRadius={new UDim(0, 0)}>
 				<Padding all={new UDim(0, 16)} />
 				<Card size={new UDim2(1, 0, 1, 0)} Native={{ AutomaticSize: "None" }}>

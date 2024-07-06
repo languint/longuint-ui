@@ -1,0 +1,51 @@
+---
+title: Getting Started
+description: How to get started using longuint-ui.
+next:
+  link: /guides/yourfirstui
+  label: Your First UI
+---
+
+import { Card, Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Card title="Installation" icon="rocket">
+    <Tabs>
+        <TabItem label="npm">
+            ```sh
+            npm i @rbxts/longuint-ui
+            ```
+        </TabItem>
+    </Tabs>
+</Card>
+
+## Creating a UI
+
+```tsx
+import React, { StrictMode } from "@rbxts/react";
+import { App } from "./app";
+import { createRoot } from "@rbxts/react-roblox";
+import { Players } from "@rbxts/services";
+
+const rootInstance = new Instance('ScreenGui')
+rootInstance.IgnoreGuiInset = true
+rootInstance.Name = "root"
+rootInstance.Parent = Players.LocalPlayer.WaitForChild("PlayerGui")
+
+const root = createRoot(rootInstance)
+
+root.render(
+    <StrictMode>
+        <RootProvider options={{pallete: Palletes.Default}}>
+            <App />
+        </RootProvider>
+    </StrictMode>
+)
+```
+
+In this example:
+
+1. We create a ScreenGui instance named "root" and attach it to the PlayerGui.
+2. createRoot() initializes the root for rendering.
+3. `<RootProvider />` wraps your application components, providing them with necessary context (e.g., default palette options).
+4. `<App />` represents your main application component, which you'll define according to your UI requirements.
+This setup initializes your longuint-ui environment, allowing you to build and render your UI components effectively.

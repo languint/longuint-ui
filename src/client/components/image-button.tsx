@@ -134,7 +134,7 @@ export function ImageButton(props: ImageButtonComponentProps) {
 		>
 			<uicorner CornerRadius={options.pallete?.custom?.borderRadius ?? Palletes.Default.custom?.borderRadius} />
 			<Icon
-				image="rbxassetid://18324277149"
+				image={props.image}
 				color={style.textColor}
 				size={new UDim2(0, 16, 0, 16)}
 				position={new UDim2(0, 16, 0.5, 0)}

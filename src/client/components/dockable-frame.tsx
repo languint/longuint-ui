@@ -95,8 +95,8 @@ export function DockableFrameComponent(props: DockableFrameComponentProps) {
 				frame.Visible = false;
 			});
 
-			if (findCollidingRegions(buttonAsDockableRegion, props.dockableRegions ?? [], parentSize).size() > 0) {
-				const regions = findCollidingRegions(buttonAsDockableRegion, props.dockableRegions ?? [], parentSize);
+			if (findCollidingRegions(buttonAsDockableRegion, props.dockableRegions ?? [], parentSize, options.dockingTolerance!).size() > 0) {
+				const regions = findCollidingRegions(buttonAsDockableRegion, props.dockableRegions ?? [], parentSize, options.dockingTolerance!);
 
 				let dockableRegion = regions[0];
 
