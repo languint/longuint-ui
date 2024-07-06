@@ -111,8 +111,6 @@ export function ImageButton(props: ImageButtonComponentProps) {
 		}
 	}, [props.text]);
 
-	print("0.0.9")
-
 	return (
 		<textbutton
 			Event={events}
