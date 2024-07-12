@@ -1,21 +1,14 @@
-import React, { ReactNode, useContext, useEffect, useRef, useState } from "@rbxts/react";
-import { Pallete } from "../../shared/types/pallete";
-import { Palletes } from "../pallete";
-import { useMotion } from "../utils/use-motion";
-import { springs } from "../springs";
+import React, { ReactNode, useContext, useEffect, useState } from "@rbxts/react";
+import { Pallete } from "../../../shared/types/pallete";
+import { Palletes } from "../../pallete";
+import { useMotion } from "../../utils/use-motion";
+import { springs } from "../../springs";
 import { TextService } from "@rbxts/services";
-import { Padding } from "./padding";
-import { OptionsContext } from "../interface/options-provider";
+import { OptionsContext } from "../../interface/options-provider";
+import { Icon } from "../icon";
+import { ButtonStyles } from "./button";
 
-export enum ButtonStyles {
-	Default,
-	Secondary,
-	Surface,
-	Outline,
-	Destructive,
-}
-
-interface ButtonComponentProps {
+interface ImageButtonComponentProps {
 	style?: ButtonStyles;
 	size?: UDim2;
 	position?: UDim2;
@@ -25,19 +18,20 @@ interface ButtonComponentProps {
 	outlineColor?: Color3;
 	Native?: React.InstanceAttributes<TextButton>;
 	onClicked?: () => void;
+	image?: string;
 }
 
-interface ButtonStyle {
+interface ImageButtonStyle {
 	background: Color3;
 	hover: Color3;
 	textColor: Color3;
 }
 
-function getStyle(style: ButtonStyles, pallete: Pallete): ButtonStyle {
+function getStyle(style: ButtonStyles, pallete: Pallete): ImageButtonStyle {
 	switch (style) {
 		case ButtonStyles.Default:
 			return {
-				background: pallete.context,
+				background: pallete.custom?.primary!,
 				hover: pallete.context.Lerp(new Color3(0, 0, 0), 0.2),
 				textColor: pallete.background,
 			};
@@ -76,7 +70,7 @@ function getStyle(style: ButtonStyles, pallete: Pallete): ButtonStyle {
 	}
 }
 
-export function Button(props: ButtonComponentProps) {
+export function ImageButton(props: ImageButtonComponentProps) {
 	const [size, setSize] = useState(props.size ?? new UDim2(0, 100, 0, 40));
 
 	const options = useContext(OptionsContext);
@@ -128,10 +122,19 @@ export function Button(props: ButtonComponentProps) {
 			Text={""}
 			AutoButtonColor={false}
 			ClipsDescendants
-			{...props.Native}
 			key={`button`}
+			{...props.Native}
 		>
 			<uicorner CornerRadius={options.pallete?.custom?.borderRadius ?? Palletes.Default.custom?.borderRadius} />
+			<Icon
+				image={props.image ?? ""}
+				color={style.textColor}
+				size={new UDim2(0, 16, 0, 16)}
+				position={new UDim2(0, 16, 0.5, 0)}
+				imageSize={new UDim2(0, 16, 0, 16)}
+				Native={{ AnchorPoint: new Vector2(0, 0.5) }}
+				useAspect
+			/>
 			<textlabel
 				Text={props.text}
 				Font={Enum.Font.BuilderSansMedium}
@@ -153,7 +156,6 @@ export function Button(props: ButtonComponentProps) {
 			) : (
 				<></>
 			)}
-			{props.children}
 		</textbutton>
 	);
 }

@@ -24,7 +24,8 @@ interface BadgeProps {
 	events?: React.InstanceEvent<TextButton>;
 	text?: string;
 	outlineColor?: Color3;
-	Native?: React.InstanceAttributes<TextButton>;
+	Native?: React.InstanceAttributes<Frame>;
+	TextNative?: React.InstanceAttributes<TextLabel>;
 }
 
 interface ButtonStyle {
@@ -83,38 +84,29 @@ export function Badge(props: BadgeProps) {
 
 	const style = getStyle(props.style ?? BadgeStyles.Default, options.pallete ?? Palletes.Default);
 
-	const [backgroundColor, backgroundColorMotion] = useMotion(style.hover);
-
-	const defaultEvents: React.InstanceEvent<TextButton> = {
-		MouseEnter: () => {
-			backgroundColorMotion.spring(style.hover, springs.slow);
-			backgroundColorMotion.start();
-		},
-		MouseLeave: () => {
-			backgroundColorMotion.spring(style.background, springs.slow);
-			backgroundColorMotion.start();
-		},
-	};
-
-	const events = props.events !== undefined ? { ...props.events, ...defaultEvents } : defaultEvents;
-
 	return (
-		<textbutton
-			Event={events}
+		<frame
 			Size={props.size ?? new UDim2()}
 			Position={props.position}
-			BackgroundColor3={backgroundColor}
+			BackgroundColor3={style.background}
 			BackgroundTransparency={props.style === BadgeStyles.Outline ? 1 : 0}
 			AutomaticSize={"XY"}
-			Text={""}
-			AutoButtonColor={false}
 			ClipsDescendants
 			{...props.Native}
 			key={`button`}
 		>
 			<Padding top={new UDim(0, 4)} bottom={new UDim(0, 4)} left={new UDim(0, 6)} right={new UDim(0, 6)} />
 			<uicorner CornerRadius={options.pallete?.custom?.borderRadius ?? Palletes.Default.custom?.borderRadius} />
-			<Text textSize={12} text={props.text} Native={{ TextXAlignment: "Center", TextYAlignment: "Center" }} size={new UDim2(1, 0, 1, 0)} />
+			<Text
+				textSize={12}
+				text={props.text}
+				Native={
+					{ TextXAlignment: "Center", TextYAlignment: "Center" } && props.TextNative !== undefined
+						? props.TextNative
+						: {}
+				}
+				size={new UDim2(1, 0, 1, 0)}
+			/>
 			{props.style === BadgeStyles.Outline ? (
 				<uistroke
 					Color={props.outlineColor !== undefined ? props.outlineColor : Palletes.Default.subtext}
@@ -124,6 +116,6 @@ export function Badge(props: BadgeProps) {
 			) : (
 				<></>
 			)}
-		</textbutton>
+		</frame>
 	);
 }

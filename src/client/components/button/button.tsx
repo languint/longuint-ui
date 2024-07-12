@@ -1,14 +1,20 @@
 import React, { ReactNode, useContext, useEffect, useState } from "@rbxts/react";
-import { Pallete } from "../../shared/types/pallete";
-import { Palletes } from "../pallete";
-import { useMotion } from "../utils/use-motion";
-import { springs } from "../springs";
+import { Pallete } from "../../../shared/types/pallete";
+import { Palletes } from "../../pallete";
+import { useMotion } from "../../utils/use-motion";
+import { springs } from "../../springs";
 import { TextService } from "@rbxts/services";
-import { OptionsContext } from "../interface/options-provider";
-import { Icon } from "./icon";
-import { ButtonStyles } from "./button";
+import { OptionsContext } from "../../interface/options-provider";
 
-interface ImageButtonComponentProps {
+export enum ButtonStyles {
+	Default,
+	Secondary,
+	Surface,
+	Outline,
+	Destructive,
+}
+
+interface ButtonComponentProps {
 	style?: ButtonStyles;
 	size?: UDim2;
 	position?: UDim2;
@@ -18,20 +24,19 @@ interface ImageButtonComponentProps {
 	outlineColor?: Color3;
 	Native?: React.InstanceAttributes<TextButton>;
 	onClicked?: () => void;
-	image?: string;
 }
 
-interface ImageButtonStyle {
+interface ButtonStyle {
 	background: Color3;
 	hover: Color3;
 	textColor: Color3;
 }
 
-function getStyle(style: ButtonStyles, pallete: Pallete): ImageButtonStyle {
+function getStyle(style: ButtonStyles, pallete: Pallete): ButtonStyle {
 	switch (style) {
 		case ButtonStyles.Default:
 			return {
-				background: pallete.custom?.primary!,
+				background: pallete.context,
 				hover: pallete.context.Lerp(new Color3(0, 0, 0), 0.2),
 				textColor: pallete.background,
 			};
@@ -70,7 +75,7 @@ function getStyle(style: ButtonStyles, pallete: Pallete): ImageButtonStyle {
 	}
 }
 
-export function ImageButton(props: ImageButtonComponentProps) {
+export function Button(props: ButtonComponentProps) {
 	const [size, setSize] = useState(props.size ?? new UDim2(0, 100, 0, 40));
 
 	const options = useContext(OptionsContext);
@@ -122,19 +127,10 @@ export function ImageButton(props: ImageButtonComponentProps) {
 			Text={""}
 			AutoButtonColor={false}
 			ClipsDescendants
-			key={`button`}
 			{...props.Native}
+			key={`button`}
 		>
 			<uicorner CornerRadius={options.pallete?.custom?.borderRadius ?? Palletes.Default.custom?.borderRadius} />
-			<Icon
-				image={props.image ?? ""}
-				color={style.textColor}
-				size={new UDim2(0, 16, 0, 16)}
-				position={new UDim2(0, 16, 0.5, 0)}
-				imageSize={new UDim2(0, 16, 0, 16)}
-				Native={{ AnchorPoint: new Vector2(0, 0.5) }}
-				useAspect
-			/>
 			<textlabel
 				Text={props.text}
 				Font={Enum.Font.BuilderSansMedium}
@@ -156,6 +152,7 @@ export function ImageButton(props: ImageButtonComponentProps) {
 			) : (
 				<></>
 			)}
+			{props.children}
 		</textbutton>
 	);
 }

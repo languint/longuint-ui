@@ -1,8 +1,8 @@
 import React, { InstanceEvent, useContext, useState } from "@rbxts/react";
-import { OptionsContext } from "../interface/options-provider";
-import { useMotion } from "../utils/use-motion";
-import { Padding } from "./padding";
-import { springs } from "../springs";
+import { OptionsContext } from "../../interface/options-provider";
+import { useMotion } from "../../utils/use-motion";
+import { Padding } from "./../padding";
+import { springs } from "../../springs";
 
 interface SwitchProps {
 	initialState?: "Enabled" | "Disabled";

@@ -5,7 +5,6 @@ import { OptionsContext } from "../interface/options-provider";
 import { Padding } from "./padding";
 import { Icon } from "./icon";
 import { DockableFrameComponent } from "./dockable-frame";
-
 interface CardProps {
 	size?: UDim2;
 	position?: UDim2;
@@ -143,6 +142,7 @@ interface CardContentProps {
 	children?: ReactNode | ReactNode[];
 	direction?: "Vertical" | "Horizontal";
 	padding?: UDim;
+	useHorizontalFlex?: boolean;
 }
 
 export function CardContent(props: CardContentProps) {
@@ -162,7 +162,7 @@ export function CardContent(props: CardContentProps) {
 				Padding={new UDim(0, 8)}
 				SortOrder={Enum.SortOrder.LayoutOrder}
 				Wraps
-				HorizontalFlex={"Fill"}
+				HorizontalFlex={props.useHorizontalFlex ? "Fill" : "None"}
 			/>
 			{props.children}
 		</Frame>
